@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ACME {{ nav }}</title>
+    <link href="/css/main.css"" rel="stylesheet"" />
+    <link href="/vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="/css/custom.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div><h1>ACME</h1></div>
+      <nav class="mainnav">
+        <ul class="nav nav-tabs">
+          <li role="presentation" {% if nav=='home' %} class="active" {% endif %} ><a href="/">Home</a></li>
+          <li role="presentation" {% if nav=='categories' %} class="active" {% endif %} ><a href="/categories">Categories ({{ catLen }})</a></li>
+        </ul>
+      </nav>
+      <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+              {% block content %}{% endblock %}
+            </div>
+            <div class="col-sm-6">
+              <h3>Data:</h3>
+              <div class="well">
+                {{ JSON.stringify(categories, null, 3) }}
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

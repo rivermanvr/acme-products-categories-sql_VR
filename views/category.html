@@ -1,0 +1,21 @@
+{% extends './layout.html' %}
+{% block content %}
+  <div><h3>Category: {{ category.name }}</h3></div>
+  <div><h6><a href="/categories"><<< return to all Categories</a></h6></div>
+  <div class="well">
+      <div><h4>Add a Product</h4></div>
+      <form action="/categories/{{ category.id }}/product" method="POST">
+        <label for="name_field">Product Name:</label>
+        <input name="name" type="text" size="50px" class="marginB" placeholder="..." />
+        <button class="btn" type="submit">Submit</button>
+      </form>
+  </div>
+  {% for product in category.products %}
+    <div class="well clear">
+      {{ product.name }}
+      <form action="/categories/{{ category.id }}/product/{{ product.id }}?_method=DELETE" method="POST">
+        <button class="btn btn-danger marginT pull-right" type="submit">Delete</button>
+      </form>
+    </div>
+  {% endfor %}
+{% endblock %}

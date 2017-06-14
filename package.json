@@ -1,0 +1,21 @@
+{
+  "name": "acme-products-categories_VR",
+  "version": "1.0.0",
+  "description": "acme products-categories",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "Vince Rios",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "bootstrap": "^3.3.7",
+    "express": "^4.15.3",
+    "method-override": "^2.3.9",
+    "path": "^0.12.7",
+    "swig": "^1.4.2"
+  }
+}
