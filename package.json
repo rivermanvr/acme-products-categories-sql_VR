@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon server.js"
+    "start:dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "Vince Rios",
@@ -16,6 +17,17 @@
     "express": "^4.15.3",
     "method-override": "^2.3.9",
     "path": "^0.12.7",
+    "pg": "^6.2.4",
+    "sequelize": "^4.1.0",
     "swig": "^1.4.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rivermanvr/acme-products-categories-sql_VR.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rivermanvr/acme-products-categories-sql_VR/issues"
+  },
+  "homepage": "https://github.com/rivermanvr/acme-products-categories-sql_VR#readme"
 }

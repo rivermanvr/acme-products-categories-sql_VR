@@ -1,59 +1,72 @@
-let _categories = [{
-  id: 1,
-  name: 'Sports',
-  products: [
-    { id: 1, name: 'pickleball racket' },
-    { id: 2, name: 'racketball racket' }
-  ]
-}];
+const db = require( './db' );
+const Category = require( './Category' );
+const Product = require( './Product' );
+const CategoryProducts = require( './CategoryProduct' )
 
-const newID = function(workArr) {
-  return workArr.reduce((max, product) => {
-    return (product.id > max) ? product.id : max;
-  }, 0) + 1;
+Category.belongsToMany(Product, { through: CategoryProducts });
+Product.belongsToMany(Category, { through: CategoryProducts });
+
+const sync = () => db.sync({ force: true });
+
+const addCategories = () => {
+  const categories = [
+    'Music-Books'
+  ];
+  const promiseArr = categories.map(name => Category.create({ name }));
+  return Promise.all(promiseArr);
 };
 
-const getProductArr = function(id) {
-  let workArr = _categories.filter(category => {
-      return category.id === id * 1;
-  });
-  if (!workArr[0].products) workArr[0].products = [];
-  return workArr[0].products;
-}
-
-const get = () => _categories;
-
-const getCatByID = function(id) {
-  return _categories.filter(category => {
-    return category.id === id * 1;
-  })[0];
+const addProducts = () => {
+  const products = [
+    'Gibson Guitar',
+    'PRS Guitar',
+    'Tennis Racket'
+  ];
+  const promiseArr = products.map(name => Product.create({ name }));
+  return Promise.all(promiseArr);
 };
 
-const addCat = function(name) {
-  let id = newID(_categories);
-  _categories.push({ id, name });
-  return { id, name };
-};
+const seed = () => sync()
+    .then(() => addCategories())
+    .then(() => addProducts())
+    .then(() => {
+      //testing aspects of Sequelize.
+      const promiseArr = [];
 
-const delCat = function(id) {
-  _categories = _categories.filter(category => {
-    return category.id !== id * 1;
-  });
-}
+      //--------------------------------------
+      // Adds a product, and categories simultaneously
+      // creates the linkage between these records in the join table.
+      //both records are newly created
 
-const addProduct = function(catID, name) {
-  let workArr = getProductArr(catID * 1);
-  let id = newID(workArr);
-  workArr.push({ id, name });
-}
+      // promiseArr[0] = Product.create({
+      //   name: 'Vin',
+      //   categories: [
+      //     { name: 'Homo Sapien' },
+      //     { name: 'Male' }
+      //   ]
+      // }, {
+      //   include: [ Category ]
+      // })
+      //--------------------------------------
 
-const delProduct = function(catID, id) {
-  let catObj = getCatByID(catID);
-  catObj.products = catObj.products.filter(category => {
-    return category.id !== id * 1;
-  });
-}
+      promiseArr[0] = Product.create({
+        name: 'skis',
+        categories: [
+          { name: 'Outdoors' },
+          { name: 'Sports' }
+        ]
+      }, {
+        include: [ Category ]
+      });
+      promiseArr[1] = Product.create({
+        name: 'Martin Guitar',
+        categories: [
+          { name: 'Music-Instruments' }
+        ]
+      }, {
+        include: [ Category ]
+      });
+      return Promise.all(promiseArr);
+    });
 
-
-
-module.exports = { get, getCatByID, addCat, delCat, addProduct, delProduct };
+module.exports = { seed, sync, models: { Category, Product } };

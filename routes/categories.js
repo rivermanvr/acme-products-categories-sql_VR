@@ -1,6 +1,7 @@
 const express = require( 'express' );
 const router = express.Router();
 const db = require( '../db' );
+const models = db.models;
 
 router.use((req, res, next) => {
   res.locals.nav = 'categories';
@@ -8,7 +9,10 @@ router.use((req, res, next) => {
 });
 
 router.get('/', (req, res, next)=> {
-  res.render('categories', { categories: db.get() });
+  models.Category.getAll()
+  .then(categories => {
+    res.render('categories', { categories });
+  })
 });
 
 router.post('/', (req, res, next)=> {
