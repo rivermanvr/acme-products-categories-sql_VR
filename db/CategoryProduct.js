@@ -2,8 +2,8 @@ const db = require( './db' );
 
 const defineAttr = {};
 
-const defineMethod = {};
+const defineOptions = {};
 
-const CategoryProduct = db.define('categoryproduct', defineAttr, defineMethod);
+const CategoryProduct = db.define('categoryproduct', defineAttr, defineOptions);
 
 module.exports = CategoryProduct;

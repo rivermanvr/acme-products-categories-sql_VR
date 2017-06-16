@@ -4,7 +4,8 @@ const swig = require( 'swig' );
 const path = require( 'path' );
 const bodyParser = require( 'body-parser' );
 const methodOverride = require( 'method-override' );
-const router = require( './routes/categories' );
+const routerCategories = require( './routes/categories' );
+const routerProducts = require( './routes/products' );
 const db = require( './db' );
 const models = db.models;
 
@@ -24,10 +25,15 @@ app.use((req, res, next) => {
     .then(categories => {
       res.locals.catLen = categories.length;
     })
+    .then(() => models.Product.getAll())
+    .then(products => {
+      res.locals.prodLen = products.length;
+    })
     .done(() => next());
 })
 
-app.use('/categories', router);
+app.use('/categories', routerCategories);
+app.use('/products', routerProducts);
 
 app.get('/', (req, res, next)=> {
   res.render('index', { nav: 'home' });

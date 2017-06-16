@@ -6,12 +6,29 @@ const defineAttr = {
   }
 };
 
-const Category = db.define('category', defineAttr);
+const defineOptions = {};
+
+const Category = db.define('category', defineAttr, defineOptions);
 
 Category.getAll = function() {
   return this.findAll({
-    // order: ['name', ASC]
-  })
+    order: ['name']
+  });
+};
+
+Category.getCatByID = function(id) {
+  return this.findById(id);
+};
+
+Category.addCategory = function(name) {
+  return this.create({ name });
+};
+
+Category.deleteCat = function(id) {
+  return this.getCatByID(id)
+    .then(record => {
+      record.destroy();
+    })
 };
 
 module.exports = Category;

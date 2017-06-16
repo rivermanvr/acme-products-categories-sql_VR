@@ -6,40 +6,36 @@ const defineAttr = {
   }
 };
 
-const Product = db.define('product', defineAttr);
+const defineOptions = {};
 
-Product.productRecords = function() {
+const Product = db.define('product', defineAttr, defineOptions);
+
+Product.getAll = function() {
   return this.findAll({
-    order: [
-      ['name', 'ASC']
-    ]
+    order: ['name']
   })
 };
 
-// const defineMethods = {
-//     classMethods: {
-//         productRecords: function() {
-//             return this.findAll({
-//                 order: [
-//                     ['name', 'ASC']
-//                 ]
-//             })
-//         },
+Product.getProdByID = function(id) {
+  return this.findById(id);
+};
+
+Product.addProduct = function(name){
+    return this.create({ name });
+};
+
+Product.deleteProd = function(id) {
+  return this.getProdByID(id)
+    .then(record => {
+      record.destroy();
+    })
+};
+
 //         deleteById: function(userId) { 
 //             userId = userId * 1;
 //             return this.destroy({
 //                 where: {id: userId}
 //             })
 //         },
-//         addProduct: function(name){
-//             return this.create({ name })
-//         },
-//         findById: function(userId) {
-//             return this.findOne({
-//                 where: {id: userId}
-//             })
-//         }
-//     }
-// };
 
 module.exports = Product;
