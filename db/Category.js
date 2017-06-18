@@ -1,4 +1,5 @@
 const db = require( './db' );
+const Product = require( './Product' );
 
 const defineAttr = {
   name: {
@@ -17,7 +18,9 @@ Category.getAll = function() {
 };
 
 Category.getCatByID = function(id) {
-  return this.findById(id);
+  return this.findById(id, {
+    include: [ Product ]
+  });
 };
 
 Category.addCategory = function(name) {

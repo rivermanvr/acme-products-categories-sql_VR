@@ -24,10 +24,12 @@ app.use((req, res, next) => {
     models.Category.getAll()
     .then(categories => {
       res.locals.catLen = categories.length;
+      res.locals.categories = categories;
     })
     .then(() => models.Product.getAll())
     .then(products => {
       res.locals.prodLen = products.length;
+      res.locals.products = products;
     })
     .done(() => next());
 })

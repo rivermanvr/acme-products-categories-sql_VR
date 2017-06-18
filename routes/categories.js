@@ -27,10 +27,12 @@ router.delete('/:id', (req, res, next)=> {
     .then(() => res.redirect('/categories'));
 });
 
-//------------------not done yet-------------------------------------
-
 router.get('/:id', (req, res, next)=> {
-  res.render('category', { category: db.getCatByID(req.params.id) });
+  models.Category.getCatByID(req.params.id)
+  .then(category => {
+    console.log('category: ', category)
+    res.render('category', { category });
+  })
 });
 
 router.post('/:id/product', (req, res, next)=> {
@@ -39,6 +41,10 @@ router.post('/:id/product', (req, res, next)=> {
   }
   res.redirect(`/categories/${req.params.id}`);
 });
+
+//------------------not done yet-------------------------------------
+
+
 
 router.delete('/:catID/product/:id', (req, res, next)=> {
   db.delProduct(req.params.catID, req.params.id);

@@ -1,10 +1,10 @@
 const db = require( './db' );
 const Category = require( './Category' );
 const Product = require( './Product' );
-const CategoryProducts = require( './CategoryProduct' )
+const CategoryProduct = require( './CategoryProduct' );
 
-Category.belongsToMany(Product, { through: CategoryProducts });
-Product.belongsToMany(Category, { through: CategoryProducts });
+Category.belongsToMany(Product, { through: CategoryProduct });
+Product.belongsToMany(Category, { through: CategoryProduct });
 
 const sync = () => db.sync({ force: true });
 
@@ -49,23 +49,16 @@ const seed = () => sync()
       // })
       //--------------------------------------
 
-      promiseArr[0] = Product.create({
-        name: 'skis',
-        categories: [
-          { name: 'Outdoors' },
-          { name: 'Sports' }
-        ]
-      }, {
-        include: [ Category ]
-      });
-      promiseArr[1] = Product.create({
-        name: 'Martin Guitar',
-        categories: [
-          { name: 'Music-Instruments' }
-        ]
-      }, {
-        include: [ Category ]
-      });
+      promiseArr[0] = Product.create({ name: 'skis', categories: [ { name: 'Outdoors' }, { name: 'Sports' }] }, { include: [ Category ] });
+
+      promiseArr[1] = Product.create({ name: 'Martin Guitar', categories: [{ name: 'Music-Instruments' }] }, { include: [ Category ] });
+
+      // promiseArr[2] = CategoryProduct.create({ categoryId: 4, productId: 1 });
+
+      // promiseArr[3] = CategoryProduct.create({ categoryId: 4, productId: 2 });
+
+      // promiseArr[4] = CategoryProduct.create({ categoryId: 2, productId: 3 });
+
       return Promise.all(promiseArr);
     });
 
