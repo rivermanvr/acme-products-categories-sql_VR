@@ -30,14 +30,13 @@ router.delete('/:id', (req, res, next)=> {
 router.get('/:id', (req, res, next)=> {
   models.Category.getCatByID(req.params.id)
   .then(category => {
-    console.log('category: ', category)
     res.render('category', { category });
   })
 });
 
 router.post('/:id/product', (req, res, next)=> {
   if (req.body.name) {
-    db.addProduct(req.params.id, req.body.name);
+    models.Category.addCatProd(req.params.id, req.body.name);
   }
   res.redirect(`/categories/${req.params.id}`);
 });
