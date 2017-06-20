@@ -9,6 +9,4 @@ db.seed()
   .then(() => console.log('acme_sql is seeded'))
   .catch(err => console.log(err));
 
-console.log('models: ', db.models);
-
 server.listen(port, () => { console.log(`listening on port ${port}`) });

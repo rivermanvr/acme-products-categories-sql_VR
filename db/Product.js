@@ -25,17 +25,10 @@ Product.addProduct = function(name){
 };
 
 Product.deleteProd = function(id) {
-  return this.getProdByID(id)
+  return this.findOne({ where: { id } })
     .then(record => {
       record.destroy();
     })
 };
-
-//         deleteById: function(userId) { 
-//             userId = userId * 1;
-//             return this.destroy({
-//                 where: {id: userId}
-//             })
-//         },
 
 module.exports = Product;

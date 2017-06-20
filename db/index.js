@@ -30,35 +30,9 @@ const seed = () => sync()
     .then(() => addCategories())
     .then(() => addProducts())
     .then(() => {
-      //testing aspects of Sequelize.
       const promiseArr = [];
-
-      //--------------------------------------
-      // Adds a product, and categories simultaneously
-      // creates the linkage between these records in the join table.
-      //both records are newly created
-
-      // promiseArr[0] = Product.create({
-      //   name: 'Vin',
-      //   categories: [
-      //     { name: 'Homo Sapien' },
-      //     { name: 'Male' }
-      //   ]
-      // }, {
-      //   include: [ Category ]
-      // })
-      //--------------------------------------
-
       promiseArr[0] = Product.create({ name: 'skis', categories: [ { name: 'Outdoors' }, { name: 'Sports' }] }, { include: [ Category ] });
-
       promiseArr[1] = Product.create({ name: 'Martin Guitar', categories: [{ name: 'Music-Instruments' }] }, { include: [ Category ] });
-
-      // promiseArr[2] = CategoryProduct.create({ categoryId: 4, productId: 1 });
-
-      // promiseArr[3] = CategoryProduct.create({ categoryId: 4, productId: 2 });
-
-      // promiseArr[4] = CategoryProduct.create({ categoryId: 2, productId: 3 });
-
       return Promise.all(promiseArr);
     });
 

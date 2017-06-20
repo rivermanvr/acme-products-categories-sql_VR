@@ -19,7 +19,7 @@ Category.getAll = function() {
 
 Category.getCatByID = function(id) {
   return this.findById(id, {
-    include: [ Product ]
+    include: [{ model: Product }]
   });
 };
 
@@ -28,23 +28,26 @@ Category.addCategory = function(name) {
 };
 
 Category.addCatProd = function(id, name){
-  this.getCatByID(id)
-    .then(category => {
-
-      /*   not sure what to do here!!  
-            The browser is looking at a specific category.
-            Listed in this category are the products that are associated with the category.
-
-            What I want to do is add a new "associated" product to this list.
-      */ 
-
-    });
+  let product;
+  Product.addProduct(name)
+    .then(_product => {
+      product = _product;
+      return this.getCatByID(id)
+    })
+    .then(category => category.addProduct(product.id));
 };
 
 Category.deleteCat = function(id) {
-  return this.getCatByID(id)
+  return this.findOne({ where: { id } })
     .then(record => {
-      record.destroy();
+      return record.destroy();
+    })
+};
+
+Category.deleteProd = function(id) {
+  return this.findOne({ where: { id } })
+    .then(record => {
+      return record.destroy();
     })
 };
 

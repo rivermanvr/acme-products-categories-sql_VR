@@ -4,22 +4,19 @@ const db = require( '../db' );
 const models = db.models;
 
 router.use((req, res, next) => {
-  res.locals.nav = 'categories';
+  res.locals.nav = 'categories'
   next();
 });
 
 router.get('/', (req, res, next)=> {
-  models.Category.getAll()
-  .then(categories => {
-    res.render('categories', { categories });
-  })
-});
+    res.render('categories');
+  });
 
 router.post('/', (req, res, next)=> {
   if (req.body.name) {
     models.Category.addCategory(req.body.name)
-  }
-  res.redirect('/categories');
+      .then(() => res.redirect('/categories'))
+  } else { res.render('categories') }
 });
 
 router.delete('/:id', (req, res, next)=> {
@@ -41,12 +38,8 @@ router.post('/:id/product', (req, res, next)=> {
   res.redirect(`/categories/${req.params.id}`);
 });
 
-//------------------not done yet-------------------------------------
-
-
-
 router.delete('/:catID/product/:id', (req, res, next)=> {
-  db.delProduct(req.params.catID, req.params.id);
+  models.Product.deleteProd(req.params.id);
   res.redirect(`/categories/${req.params.catID}`);
 });
 
