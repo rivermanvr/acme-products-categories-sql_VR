@@ -2,7 +2,8 @@ const db = require( './db' );
 
 const defineAttr = {
   name: {
-    type: db.Sequelize.STRING
+    type: db.Sequelize.STRING,
+    allowNull: false
   }
 };
 
@@ -17,14 +18,16 @@ Product.getAll = function() {
 };
 
 Product.getProdByID = function(id) {
+  id = id * 1
   return this.findById(id);
 };
 
 Product.addProduct = function(name){
-    return this.create({ name }).catch(err => console.log(err));
+    return this.create({ name });
 };
 
 Product.deleteProd = function(id) {
+  id = id * 1
   return this.findOne({ where: { id } })
     .then(record => {
       record.destroy();
