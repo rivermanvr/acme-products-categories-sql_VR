@@ -36,4 +36,4 @@ const seed = () => sync()
       return Promise.all(promiseArr);
     });
 
-module.exports = { seed, sync, models: { Category, Product } };
+module.exports = { seed, sync, models: { Category, Product, CategoryProduct } };

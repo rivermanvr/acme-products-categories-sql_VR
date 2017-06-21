@@ -33,7 +33,7 @@ app.use((req, res, next) => {
       .done(() => next());
 });
 
-app.use('/assign-products', routerAssignProducts);
+app.use('/assign_products', routerAssignProducts);
 app.use('/categories', routerCategories);
 app.use('/products', routerProducts);
 

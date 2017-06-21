@@ -1,0 +1,23 @@
+{% extends './layout.html' %}
+{% block content %}
+  <h3>Assign Products to Categories page</h3>
+    <div class="row">
+      <div class="col-sm-6">
+        <h4>Products:</h4>
+        <div class="well clear">
+          {{ product.name }}
+          <form action="/assign-products/{{ product.id }}?_method=PUT" method="POST">
+            <button class="btn marginT pull-right" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <h4>Select Categories here:</h4>
+        {% for category in categories %}
+          <div class="well clear">
+            {{ category.name }}
+          </div>
+        {% endfor %} 
+      </div>
+    </div>
+{% endblock %}
