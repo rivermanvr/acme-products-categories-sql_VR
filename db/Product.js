@@ -18,7 +18,7 @@ Product.getAll = function() {
 };
 
 Product.getProdByID = function(id) {
-  id = id * 1
+  id = id * 1;
   return this.findById(id);
 };
 
@@ -27,7 +27,7 @@ Product.addProduct = function(name){
 };
 
 Product.deleteProd = function(id) {
-  id = id * 1
+  id = id * 1;
   return this.findOne({ where: { id } })
     .then(record => {
       record.destroy();
