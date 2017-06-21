@@ -11,7 +11,7 @@
   </div>
   {% for product in products %}
     <div class="well clear">
-      <a href="/products/{{ product.id }}">{{ product.name }}</a>
+      {{ product.name }}
       <form action="/products/{{ product.id }}?_method=DELETE" method="POST">
         <button class="btn btn-danger marginT pull-right" type="submit">Delete</button>
       </form>

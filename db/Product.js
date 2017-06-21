@@ -21,7 +21,7 @@ Product.getProdByID = function(id) {
 };
 
 Product.addProduct = function(name){
-    return this.create({ name });
+    return this.create({ name }).catch(err => console.log(err));
 };
 
 Product.deleteProd = function(id) {

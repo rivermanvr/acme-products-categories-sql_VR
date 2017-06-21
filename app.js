@@ -33,9 +33,9 @@ app.use((req, res, next) => {
       .done(() => next());
 });
 
+app.use('/assign-products', routerAssignProducts);
 app.use('/categories', routerCategories);
 app.use('/products', routerProducts);
-app.use('/assign-products', routerAssignProducts);
 
 app.get('/', (req, res, next)=> {
   res.render('index', { nav: 'home' });
