@@ -1,6 +1,25 @@
 {% extends './layout.html' %}
 {% block content %}
-  <div><h5>Assign-products page</h5></div>
-  <div>TBD - will show products along side categories on the page</div>
-  <div>user will choose the categories that apply to a selected product</div>
+  <h3>Assign-products page</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Products:</h4>
+        {% for product in products %}
+          <div class="well clear">
+            {{ product.name }}
+            <form action="/assign-products/{{ product.id }}?_method=PUT" method="POST">
+              <button class="btn marginT pull-right" type="submit">Assign</button>
+            </form>
+          </div>
+        {% endfor %} 
+      </div>
+      <div class="col-md-6">
+        <h4>Categories:</h4>
+        {% for category in categories %}
+          <div class="well clear">
+            {{ category.name }}
+          </div>
+        {% endfor %} 
+      </div>
+    </div>
 {% endblock %}
