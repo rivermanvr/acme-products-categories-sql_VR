@@ -15,7 +15,7 @@ app.set('view engine', 'html');
 app.engine('html', swig.renderFile);
 
 app.use(methodOverride('_method'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded());
 app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/vendor', express.static(path.join(__dirname, 'node_modules')));
 
@@ -37,7 +37,7 @@ app.use('/assign-products', routerAssignProducts);
 app.use('/categories', routerCategories);
 app.use('/products', routerProducts);
 
-app.get('/', (req, res, next)=> {
+app.get('/', (req, res, next) => {
   res.render('index', { nav: 'home' });
 });
 

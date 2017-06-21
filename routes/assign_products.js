@@ -8,7 +8,7 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get('/', (req, res, next)=> {
+router.get('/', (req, res, next) => {
     res.render('assign-products');
 });
 

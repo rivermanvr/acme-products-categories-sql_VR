@@ -8,8 +8,7 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get('/', (req, res, next) => { res.render('categories');
-});
+router.get('/', (req, res, next) => { res.render('categories') });
 
 router.post('/', (req, res, next) => {
   if (req.body.name) {
