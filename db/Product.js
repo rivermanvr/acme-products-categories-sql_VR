@@ -28,10 +28,8 @@ Product.addProduct = function(name){
 
 Product.deleteProd = function(id) {
   id = id * 1;
-  return this.findOne({ where: { id } })
-    .then(record => {
-      record.destroy();
-    })
+  return this.destroy({ where: { id } })
+    .then(() => { console.log(`Product deleted, id: ${id}`) })
 };
 
 module.exports = Product;

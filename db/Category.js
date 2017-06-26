@@ -46,10 +46,8 @@ Category.addCatProd = function(id, name){
 
 Category.deleteCat = function(id) {
   id = id * 1;
-  return this.findOne({ where: { id } })
-    .then(record => {
-      return record.destroy();
-    })
+  return this.destroy({ where: { id } })
+    .then(() => { console.log(`Category deleted, id: ${id}`) })
 };
 
 module.exports = Category;
