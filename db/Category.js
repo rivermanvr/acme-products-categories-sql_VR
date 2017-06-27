@@ -4,7 +4,16 @@ const Product = require( './Product' );
 const defineAttr = {
   name: {
     type: db.Sequelize.STRING,
-    allowNull: false
+    unique: true,
+    allowNull: false,
+    validate: {
+      caseCheck: function(nameValue) {
+        let first = nameValue.charAt(0);
+        if (first !== first.toUpperCase()) {
+          throw new Error('Category names should be capitalized');
+        }
+      }
+    }
   }
 };
 
