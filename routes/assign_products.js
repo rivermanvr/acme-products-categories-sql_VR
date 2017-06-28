@@ -17,6 +17,7 @@ router.get('/:id', (req, res, next) => {
   models.Product.getProdByID(req.params.id)
     .then((_product) => {
       product = _product;
+      console.log('product: ', product)  //good record.....
       return models.CategoryProduct.getAll()
     })
     .then(prodCats => {
